@@ -15,8 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return [];
         }
     };
+
     const displayResults = (meals, limit = 5) => {
-        resultsContainer.innerHTML = ''; 
+        resultsContainer.innerHTML = '';
         meals.slice(0, limit).forEach(meal => {
             const mealCard = document.createElement('div');
             mealCard.classList.add('result');
@@ -29,17 +30,30 @@ document.addEventListener('DOMContentLoaded', () => {
             resultsContainer.appendChild(mealCard);
         });
     };
-        const handleSearch = async () => {
-            const query = searchInput.value.trim();
-            if (!query) return;
-    
-            fullResults = await fetchMeals(query);
-            if (fullResults.length > 0) {
-                displayResults(fullResults); 
-                showAllButton.style.display = fullResults.length > 5 ? 'block' : 'none'; 
-            } else {
-                resultsContainer.innerHTML = '<p>No results found. Try a different search.</p>'; 
-                showAllButton.style.display = 'none'; 
-            }
-        };
+    const handleSearch = async () => {
+        const query = searchInput.value.trim();
+        if (!query) return; 
 
+        fullResults = await fetchMeals(query); 
+        if (fullResults.length > 0) {
+            displayResults(fullResults); 
+            showAllButton.style.display = fullResults.length > 5 ? 'block' : 'none'; 
+        } else {
+            resultsContainer.innerHTML = '<p>No results found. Try a different search.</p>'; 
+            showAllButton.style.display = 'none';
+        }
+    };
+
+    const handleShowAll = () => {
+        displayResults(fullResults, fullResults.length); 
+        showAllButton.style.display = 'none'; 
+    };
+
+    searchButton.addEventListener('click', handleSearch); 
+    showAllButton.addEventListener('click', handleShowAll); 
+
+    searchInput.addEventListener('input', () => {
+        resultsContainer.innerHTML = '';
+        showAllButton.style.display = 'none';
+    });
+});
