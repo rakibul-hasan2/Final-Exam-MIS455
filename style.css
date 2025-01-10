@@ -101,3 +101,31 @@ footer {
     object-fit: cover;
     border-bottom: 4px solid #3498db;
 }
+.result h2 {
+    font-size: 1.5rem;
+    margin: 1rem 0 0.5rem;
+    color: #3498db;
+}
+
+.result p {
+    font-size: 1rem;
+    color: #666;
+}
+
+#show-all-wrapper {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+#show-all-button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    color: white;
+    background: #3498db;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #2980b9;
+    transition: all 0.3s ease;
+}
