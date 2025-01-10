@@ -129,3 +129,23 @@ footer {
     box-shadow: 0 5px 0 #2980b9;
     transition: all 0.3s ease;
 }
+#show-all-button:hover {
+    background: #2980b9;
+    box-shadow: 0 3px 0 #1c5980;
+    transform: translateY(2px);
+}
+
+#show-all-button:active {
+    box-shadow: 0 1px 0 #1c5980;
+    transform: translateY(4px);
+}
+
+@media (max-width: 768px) {
+    .search-section input {
+        width: 90%;
+    }
+
+    .result img {
+        max-height: 200px;
+    }
+}
