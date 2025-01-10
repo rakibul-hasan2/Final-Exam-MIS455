@@ -5,20 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const showAllButton = document.getElementById('show-all-button');
 
     let fullResults = [];
-
-    // Fetch meals from the MealDB API
     const fetchMeals = async (query) => {
         try {
             const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
             const data = await response.json();
-            return data.meals || []; // Return an empty array if no meals are found
+            return data.meals || []; 
         } catch (error) {
             console.error('Error fetching data:', error);
             return [];
         }
     };
     const displayResults = (meals, limit = 5) => {
-        resultsContainer.innerHTML = ''; // Clear previous results
+        resultsContainer.innerHTML = ''; 
         meals.slice(0, limit).forEach(meal => {
             const mealCard = document.createElement('div');
             mealCard.classList.add('result');
@@ -31,3 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
             resultsContainer.appendChild(mealCard);
         });
     };
+        const handleSearch = async () => {
+            const query = searchInput.value.trim();
+            if (!query) return;
+    
+            fullResults = await fetchMeals(query);
+            if (fullResults.length > 0) {
+                displayResults(fullResults); 
+                showAllButton.style.display = fullResults.length > 5 ? 'block' : 'none'; 
+            } else {
+                resultsContainer.innerHTML = '<p>No results found. Try a different search.</p>'; 
+                showAllButton.style.display = 'none'; 
+            }
+        };
+
